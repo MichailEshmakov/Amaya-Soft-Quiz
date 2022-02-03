@@ -9,6 +9,8 @@ namespace Model
         [SerializeField] private int _height;
         [SerializeField] private int _width;
 
-        abstract protected Theme<object> GetTheme();
+        public int Height => _height;
+        public int Width => _width;
+        public abstract ITheme Theme { get; }
     }
 }

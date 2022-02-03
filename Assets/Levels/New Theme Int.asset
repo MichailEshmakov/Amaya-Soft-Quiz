@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf72f5f7c895964aa15ad99fa1c6900, type: 3}
   m_Name: New Theme Int
   m_EditorClassIdentifier: 
-  _name: 
-  _answers: 
+  _name: "\u0427\u0438\u0441\u043B\u0430 \u043E\u0442 1 \u0434\u043E 10"
+  _answers: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000

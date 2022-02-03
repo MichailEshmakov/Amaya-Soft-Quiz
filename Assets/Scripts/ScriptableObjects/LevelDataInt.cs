@@ -8,8 +8,5 @@ public class LevelDataInt : LevelData
 {
     [SerializeField] private ThemeInt _theme;
 
-    protected override Theme<object> GetTheme()
-    {
-        return _theme.ToObject();
-    }
+    public override ITheme Theme => _theme;
 }
