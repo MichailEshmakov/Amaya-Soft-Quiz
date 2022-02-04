@@ -1,32 +1,32 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class BounceTweenAnimator : TweenAnimator
+namespace TweenAnimation
 {
-    [SerializeField] private Transform _animable;
-    [SerializeField] private float _compression;
-    [SerializeField] private float _extension;
-    [SerializeField] private float _compressionPeriod;
-    [SerializeField] private float _extensionPeriod;
-
-    protected override Action<Action> CreateAnimation()
+    public class BounceTweenAnimator : TweenAnimator
     {
-        return (Action callback) =>
+        [SerializeField] private Transform _animable;
+        [SerializeField] private float _compression;
+        [SerializeField] private float _extension;
+        [SerializeField] private float _compressionPeriod;
+        [SerializeField] private float _extensionPeriod;
+
+        protected override Action<Action> CreateAnimation()
         {
-            _animable.DOScale(-_compression, _compressionPeriod).SetRelative(true).OnComplete(() =>
+            return (Action callback) =>
             {
-                _animable.DOScale(_compression, _compressionPeriod).SetRelative(true).OnComplete(() =>
+                _animable.DOScale(-_compression, _compressionPeriod).SetRelative(true).OnComplete(() =>
                 {
-                    _animable.DOScale(_extension, _extensionPeriod).SetRelative(true).OnComplete(() =>
+                    _animable.DOScale(_compression, _compressionPeriod).SetRelative(true).OnComplete(() =>
                     {
-                        _animable.DOScale(-_extension, _extensionPeriod).SetRelative(true).OnComplete(() => callback?.Invoke());
+                        _animable.DOScale(_extension, _extensionPeriod).SetRelative(true).OnComplete(() =>
+                        {
+                            _animable.DOScale(-_extension, _extensionPeriod).SetRelative(true).OnComplete(() => callback?.Invoke());
+                        });
                     });
                 });
-            });
-        };
+            };
+        }
     }
 }

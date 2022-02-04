@@ -1,9 +1,11 @@
 ﻿using System;
-using UnityEngine;
 
-public interface IIconLibrary
+namespace ScriptableObjects
 {
-    Type Type { get; }
+    public interface IIconLibrary
+    {
+        Type Type { get; }
 
-    IIconMatch GetMatch(object value);
+        IIconMatch GetMatch(object value);
+    }
 }

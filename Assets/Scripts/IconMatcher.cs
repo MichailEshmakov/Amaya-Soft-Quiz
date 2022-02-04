@@ -1,43 +1,46 @@
-﻿using System;
-using System.Collections;
+﻿using ScriptableObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class IconMatcher : MonoBehaviour
+namespace View
 {
-    [SerializeField] private List<ScriptableObject> _iconLibraries;
-
-    private void OnValidate()
+    public class IconMatcher : MonoBehaviour
     {
-        for (int i = 0; i < _iconLibraries.Count; i++)
+        [SerializeField] private List<ScriptableObject> _iconLibraries;
+
+        private void OnValidate()
         {
-            if (_iconLibraries[i] is IIconLibrary == false)
+            for (int i = 0; i < _iconLibraries.Count; i++)
             {
-                _iconLibraries.RemoveAt(i);
-                i--;
+                if (_iconLibraries[i] is IIconLibrary == false)
+                {
+                    _iconLibraries.RemoveAt(i);
+                    i--;
+                }
             }
         }
-    }
 
-    public IIconMatch FindMatch(object value, Type type)
-    {
-        if (value == null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (type == null)
-            throw new ArgumentNullException(nameof(type));
-
-        IIconLibrary typedLibrary = _iconLibraries.FirstOrDefault(library =>
+        public IIconMatch FindMatch(object value, Type type)
         {
-            IIconLibrary iconLibrary = library as IIconLibrary;
-            return iconLibrary.Type == type;
-        }) as IIconLibrary;
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
-        IIconMatch result = typedLibrary.GetMatch(value);
-        if (result == null)
-            throw new InvalidOperationException();
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
-        return result;
+            IIconLibrary typedLibrary = _iconLibraries.FirstOrDefault(library =>
+            {
+                IIconLibrary iconLibrary = library as IIconLibrary;
+                return iconLibrary.Type == type;
+            }) as IIconLibrary;
+
+            IIconMatch result = typedLibrary.GetMatch(value);
+            if (result == null)
+                throw new InvalidOperationException();
+
+            return result;
+        }
     }
 }

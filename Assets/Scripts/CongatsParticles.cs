@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CongatsParticles : MonoBehaviour
+namespace View
 {
-    [SerializeField] private AnswerView _answerView;
-    [SerializeField] private ParticleSystem _particleSystem;
-
-    private void OnEnable()
+    public class CongatsParticles : MonoBehaviour
     {
-        _answerView.RightAnimationPlaying += OnRightAnimationPlaying;
-    }
+        [SerializeField] private AnswerView _answerView;
+        [SerializeField] private ParticleSystem _particleSystem;
 
-    private void OnDisable()
-    {
-        _answerView.RightAnimationPlaying -= OnRightAnimationPlaying;
-    }
+        private void OnEnable()
+        {
+            _answerView.RightAnimationPlaying += OnRightAnimationPlaying;
+        }
 
-    private void OnRightAnimationPlaying()
-    {
-        _particleSystem.Play();
+        private void OnDisable()
+        {
+            _answerView.RightAnimationPlaying -= OnRightAnimationPlaying;
+        }
+
+        private void OnRightAnimationPlaying()
+        {
+            _particleSystem.Play();
+        }
     }
 }

@@ -1,37 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class AnswerViewAnimator : MonoBehaviour
+namespace TweenAnimation
 {
-    [SerializeField] private WrongTweenAnimator _wrongTween;
-    [SerializeField] private BounceTweenAnimator _bounceTween;
-
-    public event UnityAction RightPlayed;
-
-    private void OnEnable()
+    public class AnswerViewAnimator : MonoBehaviour
     {
-        _bounceTween.Played += OnBounceTweenPlayed;
-    }
+        [SerializeField] private WrongTweenAnimator _wrongTween;
+        [SerializeField] private BounceTweenAnimator _bounceTween;
 
-    private void OnDisable()
-    {
-        _bounceTween.Played -= OnBounceTweenPlayed;
-    }
+        public event UnityAction RightPlayed;
 
-    public void TryPlayWrong()
-    {
-        _wrongTween.TryPlay();
-    }
+        private void OnEnable()
+        {
+            _bounceTween.Played += OnBounceTweenPlayed;
+        }
 
-    public bool TryPlayRight()
-    {
-        return _bounceTween.TryPlay();
-    }
+        private void OnDisable()
+        {
+            _bounceTween.Played -= OnBounceTweenPlayed;
+        }
 
-    private void OnBounceTweenPlayed()
-    {
-        RightPlayed?.Invoke();
+        public void TryPlayWrong()
+        {
+            _wrongTween.TryPlay();
+        }
+
+        public bool TryPlayRight()
+        {
+            return _bounceTween.TryPlay();
+        }
+
+        private void OnBounceTweenPlayed()
+        {
+            RightPlayed?.Invoke();
+        }
     }
 }

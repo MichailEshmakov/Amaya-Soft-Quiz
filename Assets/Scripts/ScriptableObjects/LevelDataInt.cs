@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Model;
 
-[CreateAssetMenu(menuName = nameof(LevelData) + "/New " + nameof(LevelDataInt))]
-public class LevelDataInt : LevelData
+namespace ScriptableObjects
 {
-    [SerializeField] private ThemeInt _theme;
+    [CreateAssetMenu(menuName = nameof(LevelData) + "/New " + nameof(LevelDataInt))]
+    public class LevelDataInt : LevelData
+    {
+        [SerializeField] private ThemeInt _theme;
 
-    public override ITheme Theme => _theme;
+        public override ITheme Theme => _theme;
+    }
 }

@@ -1,57 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using ScriptableObjects;
+using TweenAnimation;
 
-public class AnswerView : MonoBehaviour
+namespace View
 {
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private AnswerViewAnimator _animator;
-
-    private object _value;
-
-    public object Value => _value;
-
-    public event UnityAction<AnswerView> Click;
-    public event UnityAction RightAnimationPlayed;
-    public event UnityAction RightAnimationPlaying;
-
-    private void OnEnable()
+    public class AnswerView : MonoBehaviour
     {
-        _animator.RightPlayed += OnRightAnimationPlayed;
-    }
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private AnswerViewAnimator _animator;
 
-    private void OnDisable()
-    {
-        _animator.RightPlayed -= OnRightAnimationPlayed;
-    }
+        private object _value;
 
-    private void OnMouseDown()
-    {
-        if (enabled)
-            Click?.Invoke(this);
-    }
+        public object Value => _value;
 
-    public void Init(IIconMatch iconMatch)
-    {
-        _spriteRenderer.sprite = iconMatch.Sprite;
-        _value = iconMatch.Value;
-        _spriteRenderer.transform.localEulerAngles = new Vector3(0, 0, iconMatch.Rotation);
-    }
+        public event UnityAction<AnswerView> Click;
+        public event UnityAction RightAnimationPlayed;
+        public event UnityAction RightAnimationPlaying;
 
-    public void TryPlayWrongAnimation()
-    {
-        _animator.TryPlayWrong();
-    }
+        private void OnEnable()
+        {
+            _animator.RightPlayed += OnRightAnimationPlayed;
+        }
 
-    public void TryPlayRightAnimation()
-    {
-        if (_animator.TryPlayRight())
-            RightAnimationPlaying?.Invoke();
-    }
+        private void OnDisable()
+        {
+            _animator.RightPlayed -= OnRightAnimationPlayed;
+        }
 
-    private void OnRightAnimationPlayed()
-    {
-        RightAnimationPlayed?.Invoke();
+        private void OnMouseDown()
+        {
+            if (enabled)
+                Click?.Invoke(this);
+        }
+
+        public void Init(IIconMatch iconMatch)
+        {
+            _spriteRenderer.sprite = iconMatch.Sprite;
+            _value = iconMatch.Value;
+            _spriteRenderer.transform.localEulerAngles = new Vector3(0, 0, iconMatch.Rotation);
+        }
+
+        public void TryPlayWrongAnimation()
+        {
+            _animator.TryPlayWrong();
+        }
+
+        public void TryPlayRightAnimation()
+        {
+            if (_animator.TryPlayRight())
+                RightAnimationPlaying?.Invoke();
+        }
+
+        private void OnRightAnimationPlayed()
+        {
+            RightAnimationPlayed?.Invoke();
+        }
     }
 }

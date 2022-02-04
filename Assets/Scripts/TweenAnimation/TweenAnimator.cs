@@ -1,43 +1,44 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class TweenAnimator : MonoBehaviour
+namespace TweenAnimation
 {
-    private Action<Action> _animation;
-    private bool _isPlaying;
-
-    public event UnityAction Played;
-
-    private void Awake()
+    public abstract class TweenAnimator : MonoBehaviour
     {
-        _animation = CreateAnimation();
-    }
+        private Action<Action> _animation;
+        private bool _isPlaying;
 
-    public bool TryPlay()
-    {
-        if (_isPlaying == false)
+        public event UnityAction Played;
+
+        private void Awake()
         {
-            _isPlaying = true;
-            _animation?.Invoke(GetCallback());
-            return true;
+            _animation = CreateAnimation();
         }
-        else
+
+        public bool TryPlay()
         {
-            return false;
+            if (_isPlaying == false)
+            {
+                _isPlaying = true;
+                _animation?.Invoke(GetCallback());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-    }
 
-    protected abstract Action<Action> CreateAnimation();
+        protected abstract Action<Action> CreateAnimation();
 
-    private Action GetCallback()
-    {
-        return () =>
+        private Action GetCallback()
         {
-            _isPlaying = false;
-            Played?.Invoke();
-        };
+            return () =>
+            {
+                _isPlaying = false;
+                Played?.Invoke();
+            };
+        }
     }
 }

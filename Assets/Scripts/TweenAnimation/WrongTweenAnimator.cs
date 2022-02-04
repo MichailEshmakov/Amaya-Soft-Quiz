@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
-public class WrongTweenAnimator : TweenAnimator
+namespace TweenAnimation
 {
-    [SerializeField] private Transform _animable;
-    [SerializeField] private float _offset;
-    [SerializeField] private float _period;
-
-    protected override Action<Action> CreateAnimation()
+    public class WrongTweenAnimator : TweenAnimator
     {
-        return (Action callback) =>
+        [SerializeField] private Transform _animable;
+        [SerializeField] private float _offset;
+        [SerializeField] private float _period;
+
+        protected override Action<Action> CreateAnimation()
         {
-            _animable.DOMoveX(_offset, _period).SetRelative(true).OnComplete(() =>
+            return (Action callback) =>
             {
-                _animable.DOMoveX(-2 * _offset, _period * 2).SetRelative(true).OnComplete(() =>
+                _animable.DOMoveX(_offset, _period).SetRelative(true).OnComplete(() =>
                 {
-                    _animable.DOMoveX(_offset, _period).SetRelative(true).OnComplete(() => callback?.Invoke());
+                    _animable.DOMoveX(-2 * _offset, _period * 2).SetRelative(true).OnComplete(() =>
+                    {
+                        _animable.DOMoveX(_offset, _period).SetRelative(true).OnComplete(() => callback?.Invoke());
+                    });
                 });
-            });
-        };
+            };
+        }
     }
 }

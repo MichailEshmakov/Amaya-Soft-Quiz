@@ -1,30 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using View;
 
-public class TableAnimator : MonoBehaviour
+namespace TweenAnimation
 {
-    [SerializeField] private LevelGenerator _levelGenerator;
-    [SerializeField] private BounceTweenAnimator _tableBounceTween;
-
-    private void OnValidate()
+    public class TableAnimator : MonoBehaviour
     {
-        if (_levelGenerator == null)
-            _levelGenerator = FindObjectOfType<LevelGenerator>();
-    }
+        [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private BounceTweenAnimator _tableBounceTween;
 
-    private void OnEnable()
-    {
-        _levelGenerator.Generated += OnLevelGenerated;
-    }
+        private void OnValidate()
+        {
+            if (_levelGenerator == null)
+                _levelGenerator = FindObjectOfType<LevelGenerator>();
+        }
 
-    private void OnDisable()
-    {
-        _levelGenerator.Generated -= OnLevelGenerated;
-    }
+        private void OnEnable()
+        {
+            _levelGenerator.Generated += OnLevelGenerated;
+        }
 
-    private void OnLevelGenerated(string rightAnswer)
-    {
-        _tableBounceTween.TryPlay();
+        private void OnDisable()
+        {
+            _levelGenerator.Generated -= OnLevelGenerated;
+        }
+
+        private void OnLevelGenerated(string rightAnswer)
+        {
+            _tableBounceTween.TryPlay();
+        }
     }
 }

@@ -1,49 +1,51 @@
-﻿using Model;
-using System.Collections;
+﻿using ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LevelChanger : MonoBehaviour
+namespace View
 {
-    [SerializeField] private LevelGenerator _generator;
-    [SerializeField] private QuestionView _questionView;
-    [SerializeField] private List<LevelData> _levels;
-
-    private int _currentLevelIndex = 0;
-
-    public event UnityAction AllLevelsCompleted;
-
-    private void OnValidate()
+    public class LevelChanger : MonoBehaviour
     {
-        if (_generator == null)
-            _generator = FindObjectOfType<LevelGenerator>();
+        [SerializeField] private LevelGenerator _generator;
+        [SerializeField] private QuestionView _questionView;
+        [SerializeField] private List<LevelData> _levels;
 
-        if (_questionView == null)
-            _questionView = FindObjectOfType<QuestionView>();
-    }
+        private int _currentLevelIndex = 0;
 
-    private void OnEnable()
-    {
-        _questionView.RightAnswerChosen += OnRightAnswerChosen;
-    }
+        public event UnityAction AllLevelsCompleted;
 
-    private void OnDisable()
-    {
-        _questionView.RightAnswerChosen -= OnRightAnswerChosen;
-    }
+        private void OnValidate()
+        {
+            if (_generator == null)
+                _generator = FindObjectOfType<LevelGenerator>();
 
-    private void Start()
-    {
-        _generator.GenerateLevel(_levels[_currentLevelIndex]);
-    }
+            if (_questionView == null)
+                _questionView = FindObjectOfType<QuestionView>();
+        }
 
-    private void OnRightAnswerChosen()
-    {
-        _currentLevelIndex++;
-        if (_currentLevelIndex >= _levels.Count)
-            AllLevelsCompleted?.Invoke();
-        else
+        private void OnEnable()
+        {
+            _questionView.RightAnswerChosen += OnRightAnswerChosen;
+        }
+
+        private void OnDisable()
+        {
+            _questionView.RightAnswerChosen -= OnRightAnswerChosen;
+        }
+
+        private void Start()
+        {
             _generator.GenerateLevel(_levels[_currentLevelIndex]);
+        }
+
+        private void OnRightAnswerChosen()
+        {
+            _currentLevelIndex++;
+            if (_currentLevelIndex >= _levels.Count)
+                AllLevelsCompleted?.Invoke();
+            else
+                _generator.GenerateLevel(_levels[_currentLevelIndex]);
+        }
     }
 }
