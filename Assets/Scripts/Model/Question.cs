@@ -26,8 +26,6 @@ namespace Model
 
         public bool IsRight(object answer)
         {
-            Debug.Log($"{answer} : {_rightAnswer}");
-
             return answer.Equals(_rightAnswer);
         }
 
