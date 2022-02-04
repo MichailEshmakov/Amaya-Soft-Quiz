@@ -1,32 +1,29 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using Model;
 
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private AnswerView _answerViewPrefab;
     [SerializeField] private IconMatcher _iconMatcher;
-    [SerializeField] private List<LevelData> _levels;
     [SerializeField] private TableConstructor _tableConstructor;
     [SerializeField] private QuestionView _questionView;
 
     public event UnityAction<string> Generated;
 
-    private void Start()
-    {
-        GenerateLevel(_levels[0]);
-    }
+    private List<AnswerView> _answerViews;
 
     public void GenerateLevel(LevelData data)
     {
+        DestroyLevel();
         Question question = new Question(data.Theme, data.Width, data.Height);
-        List<AnswerView> answerViews = InitAnswerViews(data.Width, data.Height, question, data.Theme.Type);
-        _tableConstructor.ConstructTable(answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
-        _questionView.Init(question, answerViews);
+        _answerViews = InitAnswerViews(data.Width, data.Height, question, data.Theme.Type);
+        _tableConstructor.ConstructTable(_answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
+        _questionView.Init(question, _answerViews);
         Generated?.Invoke(question.RigthAnswer);
     }
 
@@ -46,5 +43,12 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return answerViews;
+    }
+
+    private void DestroyLevel()
+    {
+        _questionView.Uninit();
+        if (_answerViews != null)
+            _answerViews.ForEach(view => Destroy(view.gameObject));
     }
 }

@@ -28,7 +28,8 @@ public class AnswerView : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Click?.Invoke(this);
+        if (enabled)
+            Click?.Invoke(this);
     }
 
     public void Init(Sprite sprite, object value)

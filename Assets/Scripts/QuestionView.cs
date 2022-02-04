@@ -31,8 +31,24 @@ public class QuestionView : MonoBehaviour
         }
     }
 
+    public void Uninit()
+    {
+        if (_answerViews != null)
+        {
+            foreach (AnswerView answer in _answerViews)
+            {
+                answer.Click -= OnAnswerClick;
+                answer.RightAnimationPlayed -= OnRightAnimationPlayed;
+            }
+        }
+    }
+
     private void OnRightAnimationPlayed()
     {
+        foreach (AnswerView answer in _answerViews)
+        {
+            answer.enabled = false;
+        }
         RightAnswerChosen?.Invoke();
     }
 
