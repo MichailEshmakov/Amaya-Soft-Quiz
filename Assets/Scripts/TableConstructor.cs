@@ -20,7 +20,7 @@ public class TableConstructor : MonoBehaviour
         {
             for (int j = 0; j < height && i * height + j < cells.Count; j++)
             {
-                cells[i * height + j].position = leftTopPosition + new Vector2(_cellLength * i, -_cellLength * j);
+                cells[i * height + j].localPosition = leftTopPosition + new Vector2(_cellLength * i, -_cellLength * j);
             }
         }
     }

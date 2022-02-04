@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Model;
 
 public class LevelGenerator : MonoBehaviour
@@ -12,7 +13,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<LevelData> _levels;
     [SerializeField] private TableConstructor _tableConstructor;
     [SerializeField] private QuestionView _questionView;
-    [SerializeField] private QuestionText _questionText;
+
+    public event UnityAction<string> Generated;
 
     private void Start()
     {
@@ -25,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
         List<AnswerView> answerViews = InitAnswerViews(data.Width, data.Height, question, data.Theme.Type);
         _tableConstructor.ConstructTable(answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
         _questionView.Init(question, answerViews);
-        _questionText.Init(question.RigthAnswer);
+        Generated?.Invoke(question.RigthAnswer);
     }
 
     private List<AnswerView> InitAnswerViews(int width, int height, Question question, Type type)
@@ -35,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                AnswerView newAnswerView = Instantiate(_answerViewPrefab);
+                AnswerView newAnswerView = Instantiate(_answerViewPrefab, transform);
                 object answerValue = question.GetAnswer(i, j);
                 Sprite sprite = _iconMatcher.FindSprite(answerValue, type);
                 newAnswerView.Init(sprite, answerValue);

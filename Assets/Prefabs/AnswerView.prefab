@@ -269,10 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc8f1308b79b144d9b8964b95f92f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animablePart: {fileID: 2772522541191176902}
+  _animable: {fileID: 2772522541191176902}
   _compression: 0.1
   _extension: 0.1
-  _period: 0.1
+  _compressionPeriod: 0.1
+  _extensionPeriod: 0.1
 --- !u!114 &2255649672280617664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,9 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8777f9875f4a84bb8967f9199641a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wrongAnimablePart: {fileID: 2772522540504015423}
+  _animable: {fileID: 2772522540504015423}
   _offset: 0.1
-  _wrongAnimationPeriod: 0.1
+  _period: 0
 --- !u!1 &2772522540248855509
 GameObject:
   m_ObjectHideFlags: 0
