@@ -10,12 +10,12 @@ public abstract class IconLibrary<T> : ScriptableObject, IIconLibrary where T : 
 
     public Type Type => _matches[0].Type;
 
-    public Sprite GetIcon(object value)
+    public IIconMatch GetMatch(object value)
     {
         if (value == null)
             throw new ArgumentNullException(nameof(value));
 
-        Sprite result = _matches.FirstOrDefault(match => match.Value.Equals(value)).Sprite;
+        IIconMatch result = _matches.FirstOrDefault(match => match.Value.Equals(value));
         if (result == null)
             throw new ArgumentOutOfRangeException(nameof(value));
 
@@ -28,10 +28,12 @@ public abstract class IconMatch<T> : IIconMatch
 {
     [SerializeField] private Sprite _sprite;
     [SerializeField] private T _value;
+    [SerializeField] private float _rotation;
 
     public Sprite Sprite => _sprite;
     public object Value => _value;
     public Type Type => typeof(T);
+    public float Rotation => _rotation;
 }
 
 public interface IIconMatch
@@ -39,4 +41,5 @@ public interface IIconMatch
     Sprite Sprite { get; }
     object Value { get; }
     Type Type { get; }
+    float Rotation { get; }
 }

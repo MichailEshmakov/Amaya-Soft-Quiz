@@ -32,10 +32,11 @@ public class AnswerView : MonoBehaviour
             Click?.Invoke(this);
     }
 
-    public void Init(Sprite sprite, object value)
+    public void Init(IIconMatch iconMatch)
     {
-        _spriteRenderer.sprite = sprite;
-        _value = value;
+        _spriteRenderer.sprite = iconMatch.Sprite;
+        _value = iconMatch.Value;
+        _spriteRenderer.transform.localEulerAngles = new Vector3(0, 0, iconMatch.Rotation);
     }
 
     public void TryPlayWrongAnimation()

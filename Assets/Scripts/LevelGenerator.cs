@@ -36,8 +36,8 @@ public class LevelGenerator : MonoBehaviour
             {
                 AnswerView newAnswerView = Instantiate(_answerViewPrefab, transform);
                 object answerValue = question.GetAnswer(i, j);
-                Sprite sprite = _iconMatcher.FindSprite(answerValue, type);
-                newAnswerView.Init(sprite, answerValue);
+                IIconMatch iconMatch = _iconMatcher.FindMatch(answerValue, type);
+                newAnswerView.Init(iconMatch);
                 answerViews.Add(newAnswerView);
             }
         }

@@ -20,7 +20,7 @@ public class IconMatcher : MonoBehaviour
         }
     }
 
-    public Sprite FindSprite(object value, Type type)
+    public IIconMatch FindMatch(object value, Type type)
     {
         if (value == null)
             throw new ArgumentNullException(nameof(value));
@@ -34,7 +34,7 @@ public class IconMatcher : MonoBehaviour
             return iconLibrary.Type == type;
         }) as IIconLibrary;
 
-        Sprite result = typedLibrary.GetIcon(value);
+        IIconMatch result = typedLibrary.GetMatch(value);
         if (result == null)
             throw new InvalidOperationException();
 

@@ -5,5 +5,5 @@ public interface IIconLibrary
 {
     Type Type { get; }
 
-    Sprite GetIcon(object value);
+    IIconMatch GetMatch(object value);
 }
