@@ -12,6 +12,8 @@ namespace Model
         private object[,] _answers;
         private object _rightAnswer;
 
+        public string RigthAnswer => _rightAnswer.ToString();
+
         public Question(ITheme theme, int width, int height)
         {
             _answers = new object[width, height];

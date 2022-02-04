@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<LevelData> _levels;
     [SerializeField] private TableConstructor _tableConstructor;
     [SerializeField] private QuestionView _questionView;
+    [SerializeField] private QuestionText _questionText;
 
     private void Start()
     {
@@ -20,12 +21,19 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateLevel(LevelData data)
     {
-        Type type = data.Theme.Type;
         Question question = new Question(data.Theme, data.Width, data.Height);
+        List<AnswerView> answerViews = InitAnswerViews(data.Width, data.Height, question, data.Theme.Type);
+        _tableConstructor.ConstructTable(answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
+        _questionView.Init(question, answerViews);
+        _questionText.Init(question.RigthAnswer);
+    }
+
+    private List<AnswerView> InitAnswerViews(int width, int height, Question question, Type type)
+    {
         List<AnswerView> answerViews = new List<AnswerView>();
-        for (int i = 0; i < data.Width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < data.Height; j++)
+            for (int j = 0; j < height; j++)
             {
                 AnswerView newAnswerView = Instantiate(_answerViewPrefab);
                 object answerValue = question.GetAnswer(i, j);
@@ -35,7 +43,6 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        _tableConstructor.ConstructTable(answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
-        _questionView.Init(question, answerViews);
+        return answerViews;
     }
 }
