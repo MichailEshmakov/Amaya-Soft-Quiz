@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7b95dc6072d4240a80fa91e540ee0b, type: 3}
   m_Name: New Level Data Int
   m_EditorClassIdentifier: 
-  _height: 3
+  _height: 2
   _width: 3
   _theme: {fileID: 11400000, guid: d534cae14d37f2f4280e2bcc5f772675, type: 2}

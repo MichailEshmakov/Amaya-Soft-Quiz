@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private IconMatcher _iconMatcher;
     [SerializeField] private List<LevelData> _levels;
     [SerializeField] private TableConstructor _tableConstructor;
+    [SerializeField] private QuestionView _questionView;
 
     private void Start()
     {
@@ -27,12 +28,14 @@ public class LevelGenerator : MonoBehaviour
             for (int j = 0; j < data.Height; j++)
             {
                 AnswerView newAnswerView = Instantiate(_answerViewPrefab);
-                Sprite sprite = _iconMatcher.FindSprite(question.GetAnswer(i, j), type);
-                newAnswerView.Init(sprite);
+                object answerValue = question.GetAnswer(i, j);
+                Sprite sprite = _iconMatcher.FindSprite(answerValue, type);
+                newAnswerView.Init(sprite, answerValue);
                 answerViews.Add(newAnswerView);
             }
         }
 
         _tableConstructor.ConstructTable(answerViews.Select(answer => answer.transform).ToList(), data.Width, data.Height);
+        _questionView.Init(question, answerViews);
     }
 }

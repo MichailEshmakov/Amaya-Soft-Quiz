@@ -26,7 +26,9 @@ namespace Model
 
         public bool IsRight(object answer)
         {
-            return answer == _rightAnswer;
+            Debug.Log($"{answer} : {_rightAnswer}");
+
+            return answer.Equals(_rightAnswer);
         }
 
         private void FillAnswers(IReadOnlyList<object> newAnswers)
@@ -36,7 +38,7 @@ namespace Model
 
             List<object> shuffledAnswers = newAnswers.ToList();
             shuffledAnswers.Shuffle();
-            _rightAnswer = shuffledAnswers[UnityEngine.Random.Range(0, shuffledAnswers.Count)];
+            _rightAnswer = shuffledAnswers[UnityEngine.Random.Range(0, _answers.GetUpperBound(1) * _answers.GetUpperBound(0))];
 
             for (int i = 0; i < _answers.GetUpperBound(0) + 1; i++)
             {
