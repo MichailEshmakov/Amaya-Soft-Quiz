@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3171d4481a3601f42b5dc88c1203e8b1, type: 3}
-  m_Name: Icon Library Int
+  m_Name: Numbers
   m_EditorClassIdentifier: 
   _matches:
   - _sprite: {fileID: 1422184923334757970, guid: 0dc7ce48f9d0f8644971de16eaf48625,

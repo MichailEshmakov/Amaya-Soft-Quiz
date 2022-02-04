@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconLibraries:
   - {fileID: 11400000, guid: d82fbba5153b8d74987ce558bf6a01c9, type: 2}
+  - {fileID: 11400000, guid: 83b34e171f2b242439334a6c9d5430cf, type: 2}
 --- !u!4 &366775112
 Transform:
   m_ObjectHideFlags: 0
@@ -1115,7 +1116,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.85
+  m_fontSize: 29.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

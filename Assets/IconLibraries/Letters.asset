@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d436fe922fdc4ed4f8a27ec89b686f16, type: 3}
+  m_Name: Letters
+  m_EditorClassIdentifier: 
+  _matches:
+  - _sprite: {fileID: 4963718625464178563, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: A
+    _rotation: 0
+  - _sprite: {fileID: 7783457984840754399, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: B
+    _rotation: 0
+  - _sprite: {fileID: 3234300448368640894, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: C
+    _rotation: 0
+  - _sprite: {fileID: 7911670913450602933, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: D
+    _rotation: 0
+  - _sprite: {fileID: 4652326554734856401, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: E
+    _rotation: 0
+  - _sprite: {fileID: -6426668015567183463, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: F
+    _rotation: 0
+  - _sprite: {fileID: 216406037199867053, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: G
+    _rotation: 0
+  - _sprite: {fileID: -8235857483100294123, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: H
+    _rotation: 0
+  - _sprite: {fileID: -3541686595128163680, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: I
+    _rotation: 0
+  - _sprite: {fileID: -2756605603065543306, guid: 049df20c77019a34d8cf401e2180f95c,
+      type: 3}
+    _value: J
+    _rotation: 0
